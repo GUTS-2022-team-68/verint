@@ -1,1 +1,1 @@
-default_app_config = 'verint.groupmanagement.apps.GroupManagementConfig'
+default_app_config = 'verint.apps.groupmanagement.apps.GroupManagementConfig'
