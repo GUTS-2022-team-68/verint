@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.conf import settings
 
 
 def login_view(request):
