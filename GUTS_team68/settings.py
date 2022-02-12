@@ -135,3 +135,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGOUT_REDIRECT_URL = '/accounts/login' # new
