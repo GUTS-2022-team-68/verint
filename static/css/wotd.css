@@ -1,0 +1,19 @@
+body {
+    background-color:rgb(15, 24, 37);
+}
+
+h1 {
+    color: azure;
+}
+
+
+input[type=text] {
+    border: none;
+    background-color: rgb(221, 164, 90);
+    color: darkslategrey;
+    font-family: monospace;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+    caret-color: black;
+}

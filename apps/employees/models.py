@@ -19,3 +19,8 @@ class Employees(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class WordOfTheDayWord(models.Model):
+    word = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
+    height = models.IntegerField()

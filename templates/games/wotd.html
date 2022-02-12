@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href={% static 'css/wotd.css' %}>
+        <title>
+            Word of the Day
+        </title>
+    </head>
+
+    <body>
+        <h1>{{ words.0.word }}</h1> <br />
+        <form id="word_form" method="post" action="/apps/employees/wordoftheday/">
+            {% csrf_token %}
+            {% for letter in words.0.word %}
+                <input type="text" value="{{ letter }}" name="letter {{ forloop.counter0 }}" maxlength="1" />
+            {% endfor %}
+            <input type="test" name="extra letter"  maxlength="1"/>
+            <br />
+            <input type="submit" name="submit" id="submit" />
+        </form>
+        {% for word in words %}
+        {{ word.word }} <br />
+        {% endfor %}
+    </body>
+</html>
