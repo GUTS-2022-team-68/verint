@@ -36,13 +36,18 @@ h2 {
 }
 
 #prev_words  {
-    color:rgb(221, 164, 90);
+    color:rgb(0, 164, 90);
     padding-left: 25%;
 }
 
 #scores {
     color:rgb(221, 164, 90);
     padding-left: 25%
+}
+
+#how_to_play {
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 input[type=text] {

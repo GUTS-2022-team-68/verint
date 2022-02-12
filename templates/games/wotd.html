@@ -37,10 +37,23 @@
                 </div>
             </div>
             <div class="column">
+
+                <div id="how_to_play">
+                    <h2>How to Play</h2>
+                    <p>
+                        Each day the word is reset. Once a day you can change the word and the fewer letters you can change the higher your score will be. 
+                    </p>
+                </div>
+
                 <h2>Scores</h2>
                 <div id="scores">
-                    {% for score in scores %}
-                    {{ score.0 }} : {{ score.1 }} <br />
+                    <h3>Teams</h3>
+                    {% for name, score in teams.items %}
+                    {{ name }} : {{ score }} <br />
+                    {% endfor %}
+                    <h3>Users</h3>
+                    {% for name, score in users.items %}
+                    {{ name }} : {{ score }} <br />
                     {% endfor %}
                 </div>
             </div>
