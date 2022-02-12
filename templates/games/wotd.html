@@ -21,20 +21,28 @@
                 <input type="text" name="extra letter"  maxlength="1"/>
                 <br />
                 <input type="submit" name="submit" id="submit" />
+                {% if error %}
+                {{ error }}
+                {% endif %}
             </form>
         </div>
         
         <div class="row">
             <div class="column">
-
+                <h2>Previous Words</h2>
+                <div id="prev_words">
+                    {% for word in words %}
+                    {{ word.word }} <br />
+                    {% endfor %}
+                </div>
             </div>
             <div class="column">
-                {% for word in words %}
-                {{ word.word }} <br />
-                {% endfor %}
-            </div>
-            <div class="column">
-                
+                <h2>Scores</h2>
+                <div id="scores">
+                    {% for score in scores %}
+                    {{ score.0 }} : {{ score.1 }} <br />
+                    {% endfor %}
+                </div>
             </div>
 
         </div>

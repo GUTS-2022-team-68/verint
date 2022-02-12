@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    color: white;
+    font-family: monospace;
 }
 
 .header {
@@ -9,9 +11,8 @@
 
 .column {
     float: left;
-    width: 33.33%;
+    width: 50%;
     padding: 10px;
-    color:rgb(221, 164, 90);
     font-family: monospace;
     font-size: 20px;
 }
@@ -30,6 +31,19 @@ h1 {
     color: azure;
 }
 
+h2 {
+    text-align: center;
+}
+
+#prev_words  {
+    color:rgb(221, 164, 90);
+    padding-left: 25%;
+}
+
+#scores {
+    color:rgb(221, 164, 90);
+    padding-left: 25%
+}
 
 input[type=text] {
     outline-width: 0;
@@ -76,8 +90,7 @@ input[type=submit] {
     margin-bottom: 50px;
     
     padding: 20px 20px;
-    
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
     font-size: 1.4em;
     transition-duration: 0.4s;
 }
