@@ -4,11 +4,13 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from apps.employees.models import WordOfTheDayWord
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     return HttpResponse("Hello, world. employees views")
 
+@login_required
 def wordoftheday(request):
 
     words = WordOfTheDayWord.objects.order_by("-height")

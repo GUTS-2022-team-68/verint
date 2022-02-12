@@ -10,18 +10,38 @@
     </head>
 
     <body>
-        <h1>{{ words.0.word }}</h1> <br />
-        <form id="word_form" method="post" action="/apps/employees/wordoftheday/">
-            {% csrf_token %}
-            {% for letter in words.0.word %}
-                <input type="text" value="{{ letter }}" name="letter {{ forloop.counter0 }}" maxlength="1" />
-            {% endfor %}
-            <input type="test" name="extra letter"  maxlength="1"/>
-            <br />
-            <input type="submit" name="submit" id="submit" />
-        </form>
-        {% for word in words %}
-        {{ word.word }} <br />
-        {% endfor %}
+        <div class="header">
+            <h1>Word of the Day</h1> <br />
+            
+            <form id="word_form" method="post" action="/apps/employees/wordoftheday/">
+                {% csrf_token %}
+                {% for letter in words.0.word %}
+                    <input type="text" value="{{ letter }}" name="letter {{ forloop.counter0 }}" maxlength="1" />
+                {% endfor %}
+                <input type="text" name="extra letter"  maxlength="1"/>
+                <br />
+                <input type="submit" name="submit" id="submit" />
+            </form>
+        </div>
+        
+        <div class="row">
+            <div class="column">
+
+            </div>
+            <div class="column">
+                {% for word in words %}
+                {{ word.word }} <br />
+                {% endfor %}
+            </div>
+            <div class="column">
+                
+            </div>
+
+        </div>
+
+        <div class="footer">
+
+        </div>
+        
     </body>
 </html>

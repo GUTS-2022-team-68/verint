@@ -1,3 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    padding: 30px;
+    text-align: center;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    color:rgb(221, 164, 90);
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 body {
     background-color:rgb(15, 24, 37);
 }
@@ -8,6 +32,7 @@ h1 {
 
 
 input[type=text] {
+    outline-width: 0;
     border: none;
     background-color: rgb(221, 164, 90);
     color: darkslategrey;
@@ -16,4 +41,56 @@ input[type=text] {
     height: 100px;
     font-size: 100px;
     caret-color: black;
+    margin-bottom: 4px;
+    text-align: center;
 }
+
+input[type=text]:hover {
+    transition-duration: 0.2s;
+    background-color: rgb(89, 207, 211);
+}
+
+
+input[type=submit] {
+
+    
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+
+    outline: 0;
+    background-color: rgb(79, 204, 162);
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 100%;
+    border-radius: 5cm;
+
+    display: block;
+
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+    padding: 20px 20px;
+    
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.4em;
+    transition-duration: 0.4s;
+}
+
+input[type=submit]:hover {
+    transition-duration: 0.4s;
+    transform: scale(1.1);
+    background-color: crimson;
+}
+
+input[type=submit]:active {
+    transition-duration: 0.1s;
+    transform: scale(0.95);
+    background-color: goldenrod;
+}
+
