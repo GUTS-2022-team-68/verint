@@ -23,6 +23,9 @@ def game_2(request):
 
 
 def game_4(request):
+    game, created = Game.objects.get_or_create(name = "Tic Tac Toe")
+    game.number_of_plays += 1
+    game.save()
     return render(request, 'game4.html')
 
     
