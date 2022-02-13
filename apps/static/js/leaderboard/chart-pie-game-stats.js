@@ -4,16 +4,30 @@ Chart.defaults.global.defaultFontColor = '#858796';
 console.log('hi')
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
+
+var game_data = score_data["games"]
+console.log(game_data)
+
+
+var game_names = []
+var game_plays = []
+
+for (key in game_data) {
+  game_names.push(key)
+  game_plays.push(game_data[key]["plays"])
+}
+
+
+
+for (let i = 0; i < game_names.length; i++) {
+  document.getElementById("game-title-" + (i+1)).innerHTML = game_names[i]
+}
+
 const data_pie = {
-  labels: [
-    'Gamfsgghsfge 1',
-    'Game 2',
-    'Game 3',
-    'Game 4'
-  ],
+  labels: game_names,
   datasets: [{
-    label: 'My First Dataset',
-    data: [team_scores, 50, 100, 20],
+    label: 'Game Stats',
+    data: game_plays,
     backgroundColor: [
       'rgb(57, 109, 212)',
       'rgb(0, 194, 131)',

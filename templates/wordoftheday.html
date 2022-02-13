@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href={% static 'css/wotd.css' %}>
+
+    {% include "head_part.html" %}
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        {% include "sidebar_part.html" %}
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+            {% include "topbar_part.html" %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    </div>
+
+
+                    <!-- Content Row -->
+                    <!-- PLEASE PUT GAME HERE -->
+                    
+                    <div class="game">    
+                        <div class="header">
+                            <h1>Word of the Day</h1> <br />
+                            
+                            <form id="word_form" method="post" action="/apps/employees/wordoftheday/">
+                                {% csrf_token %}
+                                {% for letter in words.0.word %}
+                                    <input type="text" value="{{ letter }}" name="letter {{ forloop.counter0 }}" maxlength="1" />
+                                {% endfor %}
+                                <input type="text" name="extra letter"  maxlength="1"/>
+                                <br />
+                                <input type="submit" name="submit" id="submit" />
+                                {% if error %}
+                                {{ error }}
+                                {% endif %}
+                            </form>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="column">
+                                <h2>Previous Words</h2>
+                                <div id="prev_words">
+                                    {% for word in words %}
+                                    {{ word.word }} <br />
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="column">
+                
+                                <div id="how_to_play">
+                                    <h2>How to Play</h2>
+                                    <p>
+                                        Each day the word is reset. Once a day you can change the word and the fewer letters you can change the higher your score will be. 
+                                    </p>
+                                </div>
+                
+                                <h2>Scores</h2>
+                                <div id="scores">
+                                    <h3>Teams</h3>
+                                    {% for name, score in teams.items %}
+                                    {{ name }} : {{ score }} <br />
+                                    {% endfor %}
+                                    <h3>Users</h3>
+                                    {% for name, score in users.items %}
+                                    {{ name }} : {{ score }} <br />
+                                    {% endfor %}
+                                </div>
+                            </div>
+                
+                        </div>
+                    </div> <!-- end of game div -->
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+          {% include "footer_part.html" %}
+
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    {% include "modals_and_scripts_part.html" %}
+
+
+</body>
+
+</html>

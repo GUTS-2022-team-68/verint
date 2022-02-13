@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href={% static 'css/wotd.css' %}>
+        <title>
+            Word of the Day
+        </title>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Word of the Day</h1> <br />
+            
+            <form id="word_form" method="post" action="/apps/employees/wordoftheday/">
+                {% csrf_token %}
+                {% for letter in words.0.word %}
+                    <input type="text" value="{{ letter }}" name="letter {{ forloop.counter0 }}" maxlength="1" />
+                {% endfor %}
+                <input type="text" name="extra letter"  maxlength="1"/>
+                <br />
+                <input type="submit" name="submit" id="submit" />
+                {% if error %}
+                {{ error }}
+                {% endif %}
+            </form>
+        </div>
+        
+        <div class="row">
+            <div class="column">
+                <h2>Previous Words</h2>
+                <div id="prev_words">
+                    {% for word in words %}
+                    {{ word.word }} <br />
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="column">
+
+                <div id="how_to_play">
+                    <h2>How to Play</h2>
+                    <p>
+                        Each day the word is reset. Once a day you can change the word and the fewer letters you can change the higher your score will be. 
+                    </p>
+                </div>
+
+                <h2>Scores</h2>
+                <div id="scores">
+                    <h3>Teams</h3>
+                    {% for name, score in teams.items %}
+                    {{ name }} : {{ score }} <br />
+                    {% endfor %}
+                    <h3>Users</h3>
+                    {% for name, score in users.items %}
+                    {{ name }} : {{ score }} <br />
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+
+        </div>
+        
+    </body>
+</html>

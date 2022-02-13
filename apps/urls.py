@@ -7,6 +7,4 @@ urlpatterns = [
     path('leaderboard/', views.leaderboard, name='leaderboard'),
     path('register/', views.register_view, name='register'),
     path('employees/', include('apps.employees.urls')),
-
-
 ]
