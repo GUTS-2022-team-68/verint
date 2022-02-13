@@ -41,7 +41,7 @@
                         <div class="header">
                             <h1>Word of the Day</h1> <br />
                             
-                            <form id="word_form" method="post" action="/apps/employees/wordoftheday/">
+                            <form id="word_form" method="post" action="/employees/wordoftheday/">
                                 {% csrf_token %}
                                 {% for letter in words.0.word %}
                                     <input type="text" value="{{ letter }}" name="letter {{ forloop.counter0 }}" maxlength="1" />
