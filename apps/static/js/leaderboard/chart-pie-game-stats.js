@@ -17,7 +17,7 @@ for (key in game_data) {
   game_plays.push(game_data[key]["plays"])
 }
 
-console.log(game_plays)
+
 
 for (let i = 0; i < game_names.length; i++) {
   document.getElementById("game-title-" + (i+1)).innerHTML = game_names[i]

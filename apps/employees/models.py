@@ -3,8 +3,13 @@ from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 
+class Game(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    number_of_plays = models.IntegerField(default=0)
+
 class Score(models.Model):
-    total = models.IntegerField(default=0)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    value = models.IntegerField(default=0)
     wotd = models.IntegerField(default=0)
     tictactoe = models.IntegerField(default=0)
 
@@ -36,7 +41,3 @@ class WordOfTheDayWord(models.Model):
     word = models.CharField(max_length=20)
     name = models.CharField(max_length=50)
     height = models.IntegerField(default=0)
-
-class Game(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    number_of_plays = models.IntegerField(default=0)

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.conf import settings
+from utils.scoring import getTeamScores
 from utils.scoring import getScoreData
 from apps.employees.models import Game, Team
 from json import dumps
@@ -69,6 +70,8 @@ def leaderboard(request):
     context_dict['high_score'] = high_score
     context_dict['teams'] = combined_team_score_data
 
-    print("here", combined_team_score_data)
+    # Radio chart
+
+    radio_scores = getTeamScores(['wotd','tictactoe'])
 
     return render(request, 'leaderboard.html', context_dict)

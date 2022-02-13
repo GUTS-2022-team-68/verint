@@ -2,7 +2,7 @@ from apps.employees.models import Team, Employees, Score, Game
 from django.db.models import Q
 from django.forms.models import model_to_dict
 
-def updateTeamScores():
+def updateTeamScores(game):
 
     # Update the Scores
 
@@ -19,7 +19,7 @@ def updateTeamScores():
                 score_total += member.score.wotd
         
         if team.score == None:
-            score_record = Score.objects.create()
+            score_record = Score.objects.create(game=game)
             team.score = score_record
             team.save()
         else:
@@ -83,5 +83,3 @@ def getScoreData():
     score_dict['games'] = getGameStats()
 
     return score_dict
-
-
