@@ -32,19 +32,6 @@
                     </div>
                     
                     <!-- game -->
-                    <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <link rel="preconnect" href="https://fonts.gstatic.com">
-                            <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-                            
-                            <title>Tic-Tac-Toe</title>
-                        </head>
-                        <body>
-                
-                            </body>
                             <main class="background">
                                 <section class="title">
                                     <h1>Verint Tic-Tac-Toe</h1>
@@ -75,13 +62,13 @@
                             margin: 0;
                             font-family: 'Arial', cursive;
                         }
-                        
+
                         .background {
-                            
+
                             height: 100vh;
                             padding-top: 1px;
                         }
-                        
+
                         .title {
                             color: #498AFB;
                             text-align: center;
@@ -95,20 +82,20 @@
                             margin-top: 1em;
                             margin-bottom: 1em;
                         }
-                        
+
                         .hide {
                             display: none;
                         }
-                        
+
                         .container {
                             margin: 0 auto;
                             display: grid;
                             grid-template-columns: 33% 33% 33%;
                             grid-template-rows: 33% 33% 33%;
                             max-width: 355px;
-                        
+
                         }
-                        
+
                         .tile {
                             border: 1px solid grey;
                             min-width: 100px;
@@ -119,15 +106,15 @@
                             font-size: 50px;
                             cursor: pointer;
                         }
-                        
+
                         .playerX {
                             color: #249f9c;
                         }
-                        
+
                         .playerO {
                             color: #f44786;
                         }
-                        
+
                         .controls {
                             display: flex;
                             flex-direction: row;
@@ -135,7 +122,7 @@
                             align-items: center;
                             margin-top: 1em;
                         }
-                        
+
                         .controls button {
                             color: white;
                             padding: 8px;
@@ -145,11 +132,11 @@
                             margin-left: 1em;
                             cursor: pointer;
                         }
-                        
+
                         .restart {
                             background-color: black;
                         }
-                        
+
                         #reset {
                             background-color: #498AFB;
                         }
@@ -161,23 +148,23 @@
                             const playerDisplay = document.querySelector('.display-player');
                             const resetButton = document.querySelector('#reset');
                             const announcer = document.querySelector('.announcer');
-                        
+
                             let board = ['', '', '', '', '', '', '', '', ''];
                             let currentPlayer = 'X';
                             let isGameActive = true;
-                        
+
                             const PLAYERX_WON = 'PLAYERX_WON';
                             const PLAYERO_WON = 'PLAYERO_WON';
                             const TIE = 'TIE';
-                        
-                        
+
+
                             /*
                                 Indexes within the board
                                 [0] [1] [2]
                                 [3] [4] [5]
                                 [6] [7] [8]
                             */
-                        
+
                             const winningConditions = [
                                 [0, 1, 2],
                                 [3, 4, 5],
@@ -188,7 +175,7 @@
                                 [0, 4, 8],
                                 [2, 4, 6]
                             ];
-                        
+
                             function handleResultValidation() {
                                 let roundWon = false;
                                 for (let i = 0; i <= 7; i++) {
@@ -211,7 +198,7 @@
                                     isGameActive = false;
                                     return;
                                 }
-                                
+
                             //If there are no spaces left on the board then outcome is a tie
                             if (!board.includes(''))
                                 announce(TIE);
@@ -231,12 +218,12 @@
                                 }
                                 announcer.classList.remove('hide');
                             };
-                        
+
                             const isValidAction = (tile) => {
                                 if (tile.innerText === 'X' || tile.innerText === 'O'){
                                     return false;
                                 }
-                        
+
                                 return true;
                             };
 
@@ -252,7 +239,7 @@
                                 playerDisplay.innerText = currentPlayer;
                                 playerDisplay.classList.add(`player${currentPlayer}`);
                             }
-                        
+
                             const userAction = (tile, index) => {
                                 if(isValidAction(tile) && isGameActive) {
                                     tile.innerText = currentPlayer;
@@ -262,34 +249,31 @@
                                     changePlayer();
                                 }
                             }
-                            
+
                             //resets to a blank grid where X starts first
                             const resetBoard = () => {
                                 board = ['', '', '', '', '', '', '', '', ''];
                                 isGameActive = true;
                                 announcer.classList.add('hide');
-                        
+
                                 if (currentPlayer === 'O') {
                                     changePlayer();
                                 }
-                        
+
                                 tiles.forEach(tile => {
                                     tile.innerText = '';
                                     tile.classList.remove('playerX');
                                     tile.classList.remove('playerO');
                                 });
                             }
-                        
+
                             tiles.forEach( (tile, index) => {
                                 tile.addEventListener('click', () => userAction(tile, index));
                             });
-                        
+
                             resetButton.addEventListener('click', resetBoard);
                         });
                         </script>
-      
-                        </body>
-                        </html>
 
                 <!-- game -->
                 </div>
