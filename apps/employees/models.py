@@ -1,5 +1,6 @@
 from email.policy import default
 from pyexpat import model
+from unittest import defaultTestLoader
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -8,13 +9,14 @@ class Game(models.Model):
     number_of_plays = models.IntegerField(default=0)
 
 class Score(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
     wotd = models.IntegerField(default=0)
     tictactoe = models.IntegerField(default=0)
+    truths = models.IntegerField(default=0)
+    game_4 = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
-        self.total = self.wotd+self.tictactoe
+        self.total = self.wotd+self.tictactoe+self.truths+self.game_4
         super().save(*args, **kwargs)
 
 class Team(models.Model):

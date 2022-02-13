@@ -50,7 +50,7 @@ def leaderboard(request):
 
     teams = Team.objects.order_by('-score__total')[:5]
 
-    high_score = 0
+    high_score = 1
     for team in teams:
         if team.score.total > high_score:
             high_score = team.score.total
@@ -72,6 +72,6 @@ def leaderboard(request):
 
     # Radio chart
 
-    radio_scores = getTeamScores(['wotd','tictactoe'])
+    radio_scores = getTeamScores()
 
     return render(request, 'leaderboard.html', context_dict)

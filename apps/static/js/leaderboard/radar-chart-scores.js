@@ -15,6 +15,7 @@ var team_scores = {}
 for (key in game_data) {
   game_names.push(key)
 }
+game_names.sort()
 
 for (key in team_data) {
   team_scores = []
@@ -26,7 +27,7 @@ const data = {
 
 data['labels'] = game_names
 
-console.log(game_names)
+console.log(team_data)
 
 
 for (team in team_data) {

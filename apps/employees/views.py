@@ -43,7 +43,7 @@ def wordoftheday(request):
     game.number_of_plays += 1
     game.save()
     
-    team_scores = updateTeamScores(game)
+    team_scores = updateTeamScores()
 
     current_user = Employees.objects.get(user=request.user)
 
@@ -81,7 +81,7 @@ def wordoftheday(request):
             # Everything went right - Manage score stuff here-----------------------------------
       
             if current_user.score == None:     # Create the user a score record
-                score_record = Score.objects.create(game = game)
+                score_record = Score.objects.create()
                 current_user.score = score_record
                 current_user.save()
             else:
@@ -91,7 +91,7 @@ def wordoftheday(request):
             score_record.wotd += score              # Add the score to the database
             score_record.save()
 
-            updateTeamScores(game)
+            updateTeamScores()
 
             print("The user's score is:", Employees.objects.get(user=request.user).score.wotd)
 
