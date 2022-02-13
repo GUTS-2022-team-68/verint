@@ -45,22 +45,22 @@ def getUserWOTDScores():
 
     return dict(sorted(user_dict.items(), key=lambda item: item[1], reverse=True))
 
-def getTeamScores():
+def getTeamScores(field_list=None):
 
     teams = Team.objects.filter(~Q(score=None))
     team_dict = {}
 
     for team in teams:
-        team_dict[team.name] = model_to_dict(team.score, fields=['wotd'])
+        team_dict[team.name] = model_to_dict(team.score, fields=field_list)
     
     return team_dict
 
-def getUserScores():
+def getUserScores(field_list=None):
     users = Employees.objects.filter(~Q(score=None))
     user_dict = {}
 
     for user in users:
-        user_dict[user.user.username] = model_to_dict(user.score, fields=['wotd'])
+        user_dict[user.user.username] = model_to_dict(user.score, fields=field_list)
     
     return user_dict
 

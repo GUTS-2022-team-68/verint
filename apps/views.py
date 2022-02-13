@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.conf import settings
 from utils.scoring import getScoreData
-from apps.employees.models import Game
+from apps.employees.models import Game, Team
 from json import dumps
 
 
@@ -40,11 +40,35 @@ def leaderboard(request):
 
     score_data = getScoreData()
     dataJSON = dumps(score_data)
-    print(dataJSON)
+
     context_dict = {}
     context_dict['score_data'] = dataJSON
 
     games = Game.objects.all()
     context_dict['games'] = games
+
+    teams = Team.objects.order_by('-score__total')[:5]
+
+    high_score = 0
+    for team in teams:
+        if team.score.total > high_score:
+            high_score = team.score.total
+
+    team_scores = []
+
+    for team in teams:
+        team_scores.append(team.score.total/high_score*100)
+
+
+    bar_graph_colour_tags = ['bg-danger', 'bg-warning', 'bg-info', 'bg-success', '']
+    combined_team_score_data = []
+    
+    for i in range(len(teams)):
+        combined_team_score_data.append([teams[i], team_scores[i], bar_graph_colour_tags[i]])
+
+    context_dict['high_score'] = high_score
+    context_dict['teams'] = combined_team_score_data
+
+    print("here", combined_team_score_data)
 
     return render(request, 'leaderboard.html', context_dict)

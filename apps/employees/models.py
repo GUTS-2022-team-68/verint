@@ -4,8 +4,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Score(models.Model):
+    total = models.IntegerField(default=0)
     wotd = models.IntegerField(default=0)
     tictactoe = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        self.total = self.wotd+self.tictactoe
+        super().save(*args, **kwargs)
 
 class Team(models.Model):
     name = models.CharField(max_length=64)
