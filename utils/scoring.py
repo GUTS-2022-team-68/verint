@@ -1,5 +1,6 @@
-from apps.employees.models import Team, Employees, Score
+from apps.employees.models import Team, Employees, Score, Game
 from django.db.models import Q
+from django.forms.models import model_to_dict
 
 def updateTeamScores():
 
@@ -34,7 +35,7 @@ def updateTeamScores():
 
     return dict(sorted(score_dict.items(), key=lambda item: item[1], reverse=True))
 
-def getUserScores():
+def getUserWOTDScores():
 
     users = Employees.objects.filter(~Q(score=None))
     user_dict = {}
@@ -43,3 +44,44 @@ def getUserScores():
         user_dict[user.user.username] = user.score.wotd
 
     return dict(sorted(user_dict.items(), key=lambda item: item[1], reverse=True))
+
+def getTeamScores():
+
+    teams = Team.objects.filter(~Q(score=None))
+    team_dict = {}
+
+    for team in teams:
+        team_dict[team.name] = model_to_dict(team.score, fields=['wotd'])
+    
+    return team_dict
+
+def getUserScores():
+    users = Employees.objects.filter(~Q(score=None))
+    user_dict = {}
+
+    for user in users:
+        user_dict[user.user.username] = model_to_dict(user.score, fields=['wotd'])
+    
+    return user_dict
+
+def getGameStats():
+    games = Game.objects.all()
+    game_dict = {}
+
+    for game in games:
+        game_dict[game.name] = {'plays': game.number_of_plays}
+
+    return game_dict
+
+
+def getScoreData():
+
+    score_dict = {}
+
+    score_dict['users'] = getUserScores()
+    score_dict['teams'] = getTeamScores()
+    score_dict['games'] = getGameStats()
+
+    return score_dict
+
+

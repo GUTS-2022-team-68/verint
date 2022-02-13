@@ -2,10 +2,11 @@ from unicodedata import category
 from urllib import response
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from apps.employees.models import WordOfTheDayWord, Employees, Score, Team
+from apps.employees.models import WordOfTheDayWord, Employees, Score, Game
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from utils.scoring import updateTeamScores, getUserScores
+from utils.scoring import updateTeamScores, getUserWOTDScores, getScoreData
+from django.forms.models import model_to_dict
 import enchant
 
 
@@ -21,10 +22,6 @@ def game_2(request):
     return render(request, 'game2.html')
 
 
-def game_3(request):
-    return render(request, 'game3.html')
-
-
 def game_4(request):
     return render(request, 'game4.html')
 
@@ -32,7 +29,20 @@ def game_4(request):
 @login_required
 def wordoftheday(request):
    
+    # u = Employees.objects.get(user = request.user)
+    
+    # #print(model_to_dict(u))
 
+    # print(getScoreData())
+    
+    # end of tests ----------------------------------------------------------------------
+    
+    # Update or Create Game Model
+
+    game, created = Game.objects.get_or_create(name = "Word of the Day")
+    game.number_of_plays += 1
+    game.save()
+    
     team_scores = updateTeamScores()
 
     current_user = Employees.objects.get(user=request.user)
@@ -46,12 +56,10 @@ def wordoftheday(request):
         old_word = words[0].word
     
     d = enchant.Dict("en_UK")
-    include_words = []
-    exclude_words = []
 
     context_dict = {"words": words}
     context_dict['teams'] = team_scores
-    context_dict['users'] = getUserScores()
+    context_dict['users'] = getUserWOTDScores()
 
     if request.method == "POST":
         
@@ -63,8 +71,10 @@ def wordoftheday(request):
             if 'letter' in key:
                 new_word += letters[key]
 
-        if (not d.check(new_word) and new_word not in include_words) or new_word in exclude_words:
-            context_dict["error"] = "The word entered is invalid!"
+        if not d.check(new_word):
+            context_dict["error"] = "This word is not in the dictionary!"
+        elif new_word in [word.word for word in words]:
+            context_dict["error"] = "This word has already been used!"
         elif new_word == old_word:
             return HttpResponseRedirect(request.path_info)
         else:
@@ -88,7 +98,7 @@ def wordoftheday(request):
             WordOfTheDayWord.objects.create(word = new_word, height = words[0].height+1)
             return HttpResponseRedirect(request.path_info)
 
-    response = render(request, "games/wotd.html", context = context_dict)
+    response = render(request, "wordoftheday.html", context = context_dict)
     return response
 
 #Helper Functions

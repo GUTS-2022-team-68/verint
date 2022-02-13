@@ -1,12 +1,11 @@
+from email.policy import default
 from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import IntegerField
-
 
 class Score(models.Model):
     wotd = models.IntegerField(default=0)
-    remaining_letters = IntegerField(default=5)
+    tictactoe = models.IntegerField(default=0)
 
 class Team(models.Model):
     name = models.CharField(max_length=64)
@@ -32,3 +31,7 @@ class WordOfTheDayWord(models.Model):
     word = models.CharField(max_length=20)
     name = models.CharField(max_length=50)
     height = models.IntegerField(default=0)
+
+class Game(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    number_of_plays = models.IntegerField(default=0)

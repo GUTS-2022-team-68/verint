@@ -1,7 +1,8 @@
-* {
+.game {
     box-sizing: border-box;
     color: white;
     font-family: monospace;
+    background-color:rgb(15, 24, 37);
 }
 
 .header {
@@ -23,16 +24,16 @@
     clear: both;
 }
 
-body {
-    background-color:rgb(15, 24, 37);
-}
-
 h1 {
     color: azure;
 }
 
 h2 {
     text-align: center;
+}
+
+#content {
+    background-color:rgb(15, 24, 37); 
 }
 
 #prev_words  {

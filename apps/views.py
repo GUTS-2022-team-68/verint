@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import ObjectDoesNotExist
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.conf import settings
+from utils.scoring import getScoreData
+from apps.employees.models import Game
+from json import dumps
 
 
 def login_view(request):
@@ -35,4 +37,14 @@ def index(request):
 
 @login_required(login_url='/accounts/login/')
 def leaderboard(request):
-    return render(request, 'leaderboard.html')
+
+    score_data = getScoreData()
+    dataJSON = dumps(score_data)
+    print(dataJSON)
+    context_dict = {}
+    context_dict['score_data'] = dataJSON
+
+    games = Game.objects.all()
+    context_dict['games'] = games
+
+    return render(request, 'leaderboard.html', context_dict)

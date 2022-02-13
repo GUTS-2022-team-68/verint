@@ -154,6 +154,7 @@
                         </div>
 
                         <!-- Pie Chart -->
+                        
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
@@ -182,16 +183,16 @@
                                     </div>
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Game 1
+                                            <i class="fas fa-circle text-primary"></i> <p style="display:inline" id="game-title-1">Game 1</p>
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Game 2
+                                            <i class="fas fa-circle text-success"></i> <p style="display:inline" id="game-title-2">Game 2</p>
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-warning"></i> Game 3
+                                            <i class="fas fa-circle text-warning"></i> <p style="display:inline" id="game-title-3">Game 3</p>
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Game 4
+                                            <i class="fas fa-circle text-info"></i> <p style="display:inline" id="game-title-4">Game 4</p>
                                         </span>
                                     </div>
                                 </div>
@@ -290,9 +291,13 @@
     <script src="/static/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
+    <script>
+        var scoreJSON = '{{ score_data|safe }}';
+        var score_data = JSON.parse(scoreJSON)
+    </script>
     <script src="/static/js/demo/chart-area-demo.js"></script>
     <script src="/static/js/demo/radar-chart-demo.js"></script>
-    <script src="/static/js/demo/chart-pie-demo.js"></script>
+    <script src="/static/js/leaderboard/chart-pie-game-stats.js"></script>
 
 </body>
 
